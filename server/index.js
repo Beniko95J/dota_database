@@ -2,9 +2,11 @@ const express = require("express");
 
 const app = express();
 
-express.json();
+app.use(require('cors')());
+app.use(express.json());
 
-require('./routes/admin/index')(app)
+require('./plugins/db')(app);
+require('./routes/admin/route')(app);
 
 app.listen(3000, () => {
   console.log('Hello, world!');
